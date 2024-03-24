@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DISH DASH - Game Design Document</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+  }
+  img{
+width: 500px;
+}
+  h1,h4 {
+    text-align: center;
+  }
+  h2 {
+    text-align: left;
+    color: #333;
+  }
+  section {
+    margin-bottom: 30px;
+  }
+  ul {
+    list-style-type: circle;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 10px;
+  }
+  code {
+    font-family: Consolas, monospace;
+  }
+</style>
+</head>
+<body>
+<h1>DISH DASH - Game Design Document</h1>
+<h4>By Prarthana Biswas, Benson Chen, and William Lee</h4>
+<section>
+  <h2>Introduction</h2>
+  <p>This document describes a game called "Dish Dash", which is designed to be a simple, 2D side-scroller, where players become servers that have to rush to collect ingredients in order to create the dishes customers want. The game takes place in a food court with a total of 6 levels, where 2 levels are designated to each food vendor. The game will employ sprite-based animation, tiled backgrounds, collision detection, physics, AI, side scrolling & gravity, efficient memory management, render threading, and more basic 2D game techniques.</p>
+</section>
+
+<section>
+  <h2>Technology</h2>
+  <p>Dish Dash will be developed for the Windows Platform using the McKilla's Gorilla game engine, which is a bare-bones engine developed by Richard McKenna for rapid prototyping 2D games. DirectX will be used as the underlying rendering technology. XACT will be used for all music and sound effects management. Artwork will be brutally simple, and so we'll simply use MS Paint.</p>
+</section>
+
+<section>
+  <h2>Back Story</h2>
+  <p>After a devastating rainstorm floods Stony Brook's dining areas, leaving students and staff without a place to eat, the campus faces widespread hunger. In response to the crisis, the beloved university mascot, Wolfie, steps up as a savior by opening a vibrant food court: Dish Dash! No longer forced to rely on cheap instant noodles, students and faculty can now satisfy their appetites at this bustling hub.</p>
+  <p>As an added incentive, students who join the ranks as servers at Dish Dash have the opportunity to attend the university for free—on the condition that they never fail to please a customer. With the campus community counting on them, these student servers must navigate the bustling food court, balancing speed, efficiency, and customer satisfaction, all while striving to keep hunger at bay and ensure everyone leaves with a smile.</p>
+</section>
+
+<section>
+  <h2>Objective</h2>
+  <p>In Dish Dash, the goal is to navigate through six challenging levels, where two of each are focused on a designated food vendor within the bustling food court. Time is of the essence as you strive to serve each customer within the allotted time frame, ensuring efficiency and satisfaction. As the timer ticks down, you must expedite orders, coordinate kitchen operations, and optimize serving strategies to meet the demands of hungry customers. With each level presenting new culinary delights and increasing complexity, you'll need to stay cool under pressure and maintain a steady pace to succeed. Navigate through a diverse array of food options, from burgers to baguettes, mastering the unique challenges of each vendor. Only by meeting the time-sensitive demands of each customer can you progress through the levels, earning the honor as the ultimate culinary maestro and ensuring Dish Dash's reputation as the go-to dining destination on campus!</p>
+</section>
+
+<section>
+  <h2>Controls</h2>
+  <p>This game will be played using both a keyboard and mouse. Once started, use the following:</p>
+  <ul>
+    <li><code>A</code> - Move Left</li>
+    <li><code>D</code> - Move Right</li>
+    <li><code>LEFT-ARROW</code> - Move Left (same as A)</li>
+    <li><code>RIGHT-ARROW</code> - Move Right (same as D)</li>
+    <li><code>SPACE</code> - Jump</li>
+    <li><code>ENTER</code> - Action; Picking up/Dropping off an ingredient or dish</li>
+    <li><code>ESC</code> - This pauses the game and presents a pop-up window to the player asking them to continue when they are ready. If a game is not in progress, ESC does nothing.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Graphical User Interface</h2>
+ <p>Splash Screen - The splash screen GUI simply presents a game logo and will load the game after a few seconds. Upon loading, a brief scripted sequence is played explaining a little about the origins of Dine Dash food court and the back story for the game.</p>
+ <img src="splash_screen.png" alt="splash_screen"></img>
+ <p>Main Menu - Lets the user start the game as well as go to a levels selection screen, a controls screen, and a help screen.</p>
+ <img src="main_menu.png" alt="main_menu"></img>
+ <p>Levels Selection Screen - this screen should nicely present the playable levels such that the user may select one to play. The difference of colors of the levels indicate the they belong to a certain food vendor.</p>
+ <img src="levels_screen_selection.png" alt="levels_screen_selection"></img>
+ <p>Controls Screen</p>
+ <img src="controls_screen.png" alt="controls_screen"></img>
+ <p>Help Screen</p>
+ <img src="help_screen.png" alt="help_screen"></img>
+ <p>In-Game Screen</p>
+ <img src="in_game_screen.png" alt="in_game_screen"></img>
+</section>
+
+<section>
+  <h2>Artwork</h2>
+  <p>All artwork in the game will be original. The following needs to be created:</p>
+  <h3>Server:</h3>
+  <ul>
+    <li>Walking Right</li>
+    <li>Walking Left</li>
+    <li>Jumping Right</li>
+    <li>Jumping Left</li>
+    <li>Jumping Up</li>
+    <li>Jumping Down</li>
+    <li>Picking up</li>
+    <li>Dropping off</li>
+  </ul>
+  <h3>Customers:</h3>
+  <ul>
+    <li>Patient Face: Waiting for Food</li>
+    <li>Concerned Face: When half of the time is remaining</li>
+    <li>Angry Face: Time is up and food is not served</li>
+    <li>Happy Face: When food is served in a timely manner</li>
+  </ul>
+  <h3>Ingredients & Final Dishes:</h3>
+  <p>These sprites are all idle and will not perform any animations</p>
+  <h3>Cooking Stations/Appliances:</h3>
+  <ul>
+    <li>Idle State: Item is not being used</li>
+    <li>Cooking: Item is being used</li>
+    <li>Done: Item has finished preparing dish</li>
+  </ul>
+  <h3>Ceiling, Floor, & Wall Tiles:</h3>
+  <p>The restaurants will have multiple floors and platforms to jump onto and off of. We'll use simple tiles for all walkable/collidable surfaces. These tiles will have to clearly define where the walkable surface is. We'll use straight-grooved walking surfaces. The platforms will be designed based on the specific restaurant in the levels.</p>
+</section>
+
+
+<section>
+  <h2>Sound Effects</h2>
+  <p>
+  <ul>
+    <li>Customer being Satisfied</li> 
+    <li>Customer being Angry</li>
+    <li>cooked - Timer dinging</li> 
+    <li>Food cooking - Ticking Timer</li>
+    <li>Dashing/Running</li>
+  </ul>
+</p>
+</section>
+
+<section>
+  <h2>Music</h2>
+  <p>Game Music will be added when time permits.</p>
+</section>
+
+</body>
+</html>
